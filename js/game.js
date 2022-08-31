@@ -9,26 +9,44 @@ const timeEl = document.querySelector('#timer');
 let questions = [
     {
         //question
-        question:"How do I get this answer",
+        questionOne:"Which is a JavaScript Data Type?",
         //answers
-        answers: ["Answer A", "Answer B", "Answer C", "Answer D"],
+        answers: ["String", "div", "body", "h1"],
         //correct answer 
+        correctAns: "String"
+    },
+    {
+        //question
+        questionTwo:"Which is a looping structure?",
+        //answers
+        answers: ["For loop", "IF/Else", "Array", "Function"],
+        //correct answer 
+        correctAns: "For loop"
+    },
+    {
+        //question
+        questionThree:"Array uses what to store more than one item?",
+        //answers
+        answers: ["Parentheses", "Curly Braces", "Square Brackets", "Carrot Brackets"],
+        //correct answer 
+        correctAns: "Square Brackets" 
+    },
+    {
+        //question
+        questionFour:"Functions are used in what?",
+        //answers
+        answers: ["Html", "CSS", "Java", "JavaScript"],
+        //correct answer 
+        correctAns: "JavaScript" 
+    },
+    {
+        //question
+        questionFive:"What is the peferred way to Declare a Variable?",
+        //answers
+        answers: ["const/let", "var", "Delcare", "Define"],
+        //correct answer 
+        correctAns: "const/let" 
     }
-    // {
-    //     //question
-    //     //answers
-    //     //correct answer 
-    // },
-    // {
-    //     //question
-    //     //answers
-    //     //correct answer 
-    // },
-    // {
-    //     //question
-    //     //answers
-    //     //correct answer 
-    // },
     
 ];
 let questionPosition = 0;
