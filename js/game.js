@@ -1,8 +1,8 @@
 // Declare count down
-let timeLeft = 0;
+let timeLeft = 60;
 let timeInterval;
 
-let timeEl = document.querySelector('#timer');
+
 
 
 //DECLARE  questions number (done)
@@ -72,16 +72,20 @@ document.getElementById("testOne").innerHTML = questionOne;
 function timer(){
     timeInterval = setInterval(function(){
         timeLeft--;
-        timeEl.textContent = timeLeft;
-        if(timeLeft === 0){
-            // stops execution of action at set interval
+        
+        if(timeLeft >= 0){
+            let timeEl = document.getElementById('timer');
+            timeEl.innerHTML = timeLeft;
+            // stops execution of action at set interval  
+        }else{
             clearInterval(timeInterval);
-
         }
+        
 
     },1000);
+    
 }
-
+timer();
 
 
 // function to startgame
