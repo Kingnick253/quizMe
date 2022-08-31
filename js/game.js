@@ -1,10 +1,11 @@
 // Declare count down
+let timeLeft = 0;
 let timeInterval;
 
-const timeEl = document.querySelector('#timer');
+let timeEl = document.querySelector('#timer');
 
 
-//DECLARE  questions number
+//DECLARE  questions number (done)
 
 let questions = [
     {
@@ -49,10 +50,10 @@ let questions = [
     }
     
 ];
+// setquestionpostion to 0
 let questionPosition = 0;
-//  Declare a `timerInterval
 let currentQuestion = questions[questionPosition];
-// for(let i = 0; i < questions.length; i++);
+for(let i = 0; i < questions.length; i++);
 
 // const questionPrompt = $(".question");
 // questionPrompt.html("");
@@ -66,7 +67,21 @@ let questionOne = `
 `
 document.getElementById("testOne").innerHTML = questionOne;
 
+//  Declare a `timerInterval`
 //DELCARE the 'timeel'
+function timer(){
+    timeInterval = setInterval(function(){
+        timeLeft--;
+        timeEl.textContent = timeLeft;
+        if(timeLeft === 0){
+            // stops execution of action at set interval
+            clearInterval(timeInterval);
+
+        }
+
+    },1000);
+}
+
 
 
 // function to startgame
