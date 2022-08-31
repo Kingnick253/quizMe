@@ -1,43 +1,58 @@
 // Declare count down
 let timeInterval;
+
 const timeEl = document.querySelector('#timer');
 
+
 //DECLARE  questions number
-let questionPosition = 0;
-const questions = [
+
+let questions = [
     {
         //question
-        question:[],
+        question:"How do I get this answer",
         //answers
-        answers: ["Answer A", "Answer B", "Answer C"],
+        answers: ["Answer A", "Answer B", "Answer C", "Answer D"],
         //correct answer 
-    },
-    {
-        //question
-        //answers
-        //correct answer 
-    },
-    {
-        //question
-        //answers
-        //correct answer 
-    },
-    {
-        //question
-        //answers
-        //correct answer 
-    },
+    }
+    // {
+    //     //question
+    //     //answers
+    //     //correct answer 
+    // },
+    // {
+    //     //question
+    //     //answers
+    //     //correct answer 
+    // },
+    // {
+    //     //question
+    //     //answers
+    //     //correct answer 
+    // },
     
 ];
+let questionPosition = 0;
 //  Declare a `timerInterval
-const currentQuestion = questions[questionPosition];
-for(let i = 0; i < questions.length; i++);
+let currentQuestion = questions[questionPosition];
+// for(let i = 0; i < questions.length; i++);
+
+// const questionPrompt = $(".question");
+// questionPrompt.html("");
+let questionOne = `
+<h2>${currentQuestion.question}</h2>
+<button data-answer="${currentQuestion.answers[0]}">A</button>
+<button data-answer=" ${currentQuestion.answers[1]}">B</button>
+<button data-answer=" ${currentQuestion.answers[2]}">C</button>
+<button data-answer=" ${currentQuestion.answers[3]}">D</button>
+
+`
+document.getElementById("testOne").innerHTML = questionOne;
 
 //DELCARE the 'timeel'
 
 
 // function to startgame
-function startGame(){
+// function startGame(){
     
     
     //needs to hide the start screen
@@ -51,10 +66,10 @@ function startGame(){
     // Start the timer `Starttimer`
     // IF `countdown` === 0 THEN `endGame()`
     
-}
+// }
 
 // Function `endGame`
-    function endGame(){
+    // function endGame(){
         //Hide the questions area
 
         // show the recorded highscore
@@ -63,9 +78,9 @@ function startGame(){
 
 
 
-    }
+    // }
 //function to answerQuestion
-    function answerQuestion(){
+    // function answerQuestion(){
 
     //Check if the answer is right
     
@@ -84,15 +99,15 @@ function startGame(){
     
     // questionPosition++
     // displayCurrentQuestion()
-}
+// }
 
 // Function `displayCurrentQuestion`
-    function displayCurrentQuestion(){
-        questions[questionPosition]
+    // function displayCurrentQuestion(){
+        // questions[questionPosition]
         
-    }
+    // }
 // Function `recordTheHighscore`
-    function recordHighscore(){
+    // function recordHighscore(){
+// 
 
-        
-    }
+    // }
