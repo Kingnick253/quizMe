@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="test">
+    </div>
+    <!-- <div id="highscoore">
+        
+    </div> -->
+        <!-- <a href="./highscore.html">View Highscore</a>
+        <div>
+            Timer:<span id="timer">0</span>
+        </div>
+         
+    </div> -->
+    <script>
+  let questions = [
+    {
+        //question
+        question:"How do I get this answer",
+        //answers
+        answers: ["Answer A", "Answer B", "Answer C", "Answer D"],
+        //correct answer 
+    }
+    ];
+    let questionPosition = 0;
+    let currentQuestion = questions[questionPosition];
+    let questionOne = `
+    <h2>${currentQuestion.question}</h2>
+    <button data-${currentQuestion.answers[0]}="${currentQuestion.answers[0]}">A</button>
+    <button data-${currentQuestion.answers[1]}=" ${currentQuestion.answers[1]}">B</button>
+    <button data-${currentQuestion.answers[2]}=" ${currentQuestion.answers[2]}">C</button>
+    <button data-${currentQuestion.answers[3]}=" ${currentQuestion.answers[3]}">D</button>
+
+    `
+    document.getElementById("test").innerHTML = questionOne;
+    </script>
+    
+</body>
+</html>

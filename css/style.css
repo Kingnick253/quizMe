@@ -1,0 +1,16 @@
+root{
+    --buttonC: #1D3557;
+}
+/*  aligns the content in the center of the page */
+.start{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Set the nav bar in the right position */
+.time{
+    display: flex;
+    justify-content: space-between;
+}
