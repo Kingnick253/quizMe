@@ -1,6 +1,5 @@
 // Declare count down
-let timeLeft = 60;
-let timeInterval;
+
 
 
 
@@ -10,7 +9,7 @@ let timeInterval;
 let questions = [
     {
         //question
-        questionOne:"Which is a JavaScript Data Type?",
+        question:"Which is a JavaScript Data Type?",
         //answers
         answers: ["String", "div", "body", "h1"],
         //correct answer 
@@ -18,15 +17,15 @@ let questions = [
     },
     {
         //question
-        questionTwo:"Which is a looping structure?",
+        question:"Which is a looping structure?",
         //answers
-        answers: ["For loop", "IF/Else", "Array", "Function"],
+        answers: ["For Loop", "IF/Else", "Array", "Function"],
         //correct answer 
-        correctAns: "For loop"
+        correctAns: "For Loop"
     },
     {
         //question
-        questionThree:"Array uses what to store more than one item?",
+        question:"Array uses what to store more than one item?",
         //answers
         answers: ["Parentheses", "Curly Braces", "Square Brackets", "Carrot Brackets"],
         //correct answer 
@@ -34,7 +33,7 @@ let questions = [
     },
     {
         //question
-        questionFour:"Functions are used in what?",
+        question:"Functions are used in what?",
         //answers
         answers: ["Html", "CSS", "Java", "JavaScript"],
         //correct answer 
@@ -42,7 +41,7 @@ let questions = [
     },
     {
         //question
-        questionFive:"What is the peferred way to Declare a Variable?",
+        question:"What is the peferred way to Declare a Variable?",
         //answers
         answers: ["const/let", "var", "Delcare", "Define"],
         //correct answer 
@@ -53,29 +52,34 @@ let questions = [
 // setquestionpostion to 0
 let questionPosition = 0;
 let currentQuestion = questions[questionPosition];
-for(let i = 0; i < questions.length; i++);
+// for(let i = 0; i < questions.length; i++);
 
 // const questionPrompt = $(".question");
 // questionPrompt.html("");
-let questionOne = `
-<h2>${currentQuestion.question}</h2>
-<button data-answer="${currentQuestion.answers[0]}">A</button>
-<button data-answer=" ${currentQuestion.answers[1]}">B</button>
-<button data-answer=" ${currentQuestion.answers[2]}">C</button>
-<button data-answer=" ${currentQuestion.answers[3]}">D</button>
+function questPosition(){
+    let template = `
+    <h2>${currentQuestion.question}</h2>
+    <button data-answer="${currentQuestion.answers[0]}">${currentQuestion.answers[0]}</button>
+    <button data-answer=" ${currentQuestion.answers[1]}">${currentQuestion.answers[1]}</button>
+    <button data-answer=" ${currentQuestion.answers[2]}">${currentQuestion.answers[2]}</button>
+    <button data-answer=" ${currentQuestion.answers[3]}">${currentQuestion.answers[3]}</button>
+    
+    `
+    document.getElementById("gameContainer").innerHTML = template;
 
-`
-document.getElementById("testOne").innerHTML = questionOne;
+}
 
 //  Declare a `timerInterval`
 //DELCARE the 'timeel'
+let timeLeft = 60;
+
 function timer(){
-    timeInterval = setInterval(function(){
+   let timeInterval = setInterval(function(){
         timeLeft--;
         
         if(timeLeft >= 0){
-            let timeEl = document.getElementById('timer');
-            timeEl.innerHTML = timeLeft;
+            let timeEl = document.querySelector('#timer');
+            timeEl.textContent = timeLeft;
             // stops execution of action at set interval  
         }else{
             clearInterval(timeInterval);
@@ -85,17 +89,19 @@ function timer(){
     },1000);
     
 }
-timer();
+
 
 
 // function to startgame
-// function startGame(){
-    
-    
+function startGame(){
+    timer();
+    const start = document.querySelector(".start");
+//  google how to add a class in lieu of setting attribute.
+    start.setAttribute("class", "hide");
     //needs to hide the start screen
     
-    //st the quesiton position to 0
-    
+    //start the question position to 0
+    questPosition();
     // display the current quesiton
     
     //set the starting value of ` countdown`
@@ -103,7 +109,7 @@ timer();
     // Start the timer `Starttimer`
     // IF `countdown` === 0 THEN `endGame()`
     
-// }
+}
 
 // Function `endGame`
     // function endGame(){
@@ -132,6 +138,7 @@ timer();
         
     // ELSE 
         // Display the next question
+        // call questPosition();
 
     
     // questionPosition++
@@ -148,3 +155,5 @@ timer();
 // 
 
     // }
+    let startBtn = document.querySelector("#startBtn");
+    startBtn.addEventListener("click", startGame);
