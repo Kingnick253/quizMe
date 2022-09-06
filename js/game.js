@@ -1,8 +1,8 @@
 // Declare count down
+let startBtn = document.querySelector("#startBtn");
 
 
-
-
+const hideEndScreen = document.querySelector(".endGame").style.display = "none";
 
 //DECLARE  questions number (done)
 
@@ -100,20 +100,27 @@ function startGame(){
     start.setAttribute("class", "hide");
     //needs to hide the start screen
     
-    //start the question position to 0
+    //start the question position to 0,display the current quesiton
     questPosition();
-    // display the current quesiton
     
+   
     //set the starting value of ` countdown`
     
     // Start the timer `Starttimer`
     // IF `countdown` === 0 THEN `endGame()`
-    
+    if(timeLeft === 58){
+        endGame();
+    }
 }
 
 // Function `endGame`
-    // function endGame(){
+
+    function endGame(){
         //Hide the questions area
+        const quest = document.querySelector("gameContainer");
+        quest = setAttribute("class", "hide");
+        hideEndScreen = setAttribute("class" ,"block");
+        console.log("Game ended ");
 
         // show the recorded highscore
 
@@ -121,7 +128,7 @@ function startGame(){
 
 
 
-    // }
+    }
 //function to answerQuestion
     // function answerQuestion(){
 
@@ -155,5 +162,5 @@ function startGame(){
 // 
 
     // }
-    let startBtn = document.querySelector("#startBtn");
+    
     startBtn.addEventListener("click", startGame);
