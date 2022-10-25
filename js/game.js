@@ -1,4 +1,7 @@
-// Declare count down
+let btnAnswer = document.querySelectorAll("button");
+let questionPosition = 0;
+let timeEl = document.querySelector('#timer');
+let scoreKeeper = document.querySelector('#score');
 
 
 
@@ -50,83 +53,109 @@ let questions = [
     
 ];
 // setquestionpostion to 0
-let questionPosition = 0;
-let currentQuestion = questions[questionPosition];
-// for(let i = 0; i < questions.length; i++);
+
+
 
 // const questionPrompt = $(".question");
 // questionPrompt.html("");
-function questPosition(){
+let currentQuestion = questions[questionPosition];
+
+function displayQuestion(){
+    // for(i=0; i <questions.length; i++){
     let template = `
     <h2>${currentQuestion.question}</h2>
-    <button data-answer="${currentQuestion.answers[0]}">${currentQuestion.answers[0]}</button>
-    <button data-answer=" ${currentQuestion.answers[1]}">${currentQuestion.answers[1]}</button>
-    <button data-answer=" ${currentQuestion.answers[2]}">${currentQuestion.answers[2]}</button>
-    <button data-answer=" ${currentQuestion.answers[3]}">${currentQuestion.answers[3]}</button>
+    <button id = btn data-answer="${currentQuestion.answers[0]}">${currentQuestion.answers[0]}</button>
+    <button id = btn data-answer=" ${currentQuestion.answers[1]}">${currentQuestion.answers[1]}</button>
+    <button id = btn data-answer=" ${currentQuestion.answers[2]}">${currentQuestion.answers[2]}</button>
+    <button id = btn data-answer=" ${currentQuestion.answers[3]}">${currentQuestion.answers[3]}</button>
     
     `
     document.getElementById("gameContainer").innerHTML = template;
-
+    
+    
+    console.log(btn1.value)
+    console.log(btn2.value)
+    console.log(btn3.value)
+    console.log(btn4.value)
+    // }
 }
 
 //  Declare a `timerInterval`
 //DELCARE the 'timeel'
+
+
+
 let timeLeft = 60;
 
 function timer(){
-   let timeInterval = setInterval(function(){
-        timeLeft--;
-        
+    
+    let timeInterval = setInterval(function(){
+    console.log(timeLeft);
+    timeLeft--;
+    timeEl.textContent = timeLeft;
         if(timeLeft >= 0){
-            let timeEl = document.querySelector('#timer');
-            timeEl.textContent = timeLeft;
-            // stops execution of action at set interval  
+        
         }else{
+           
             clearInterval(timeInterval);
+
+            // endGame();
+            // stops execution of action at set interval  
+        
         }
         
 
     },1000);
-    
 }
 
 
 
 // function to startgame
 function startGame(){
+    // starts timer
     timer();
-    const start = document.querySelector(".start");
+    const homepage = document.querySelector(".homepage");
 //  google how to add a class in lieu of setting attribute.
-    start.setAttribute("class", "hide");
+    homepage.setAttribute("class", "hide");
     //needs to hide the start screen
     
     //start the question position to 0
-    questPosition();
+    questionPosition = 0;
     // display the current quesiton
-    
-    //set the starting value of ` countdown`
-    
+    displayQuestion();
+    // displayQuestion();
+    //set the starting value of `countdown`
+    // let countdown = 60;
     // Start the timer `Starttimer`
+  
     // IF `countdown` === 0 THEN `endGame()`
     
 }
 
 // Function `endGame`
-    // function endGame(){
-        //Hide the questions area
+    function endGame(){
+        // Hide the questions area
+    
 
         // show the recorded highscore
 
-        //CLEAR the timer interval to stop from running
+        // CLEAR the timer interval to stop from running
 
 
 
-    // }
+    }
 //function to answerQuestion
-    // function answerQuestion(){
-
+    function answerQuestion(event){
+        let scoreCount = 0;
     //Check if the answer is right
-    
+        if(event.target.matches("#btn")){
+            if(event.target.textContent ===currentQuestion.correctAns){
+                scoreCount += 5;
+            }else if(scoreCount < 0){
+                scoreCount =0;
+            }
+
+        }
     // IF the answer is wrong
     
     // THEN we need to subtract from 'countdown'
@@ -143,7 +172,7 @@ function startGame(){
     
     // questionPosition++
     // displayCurrentQuestion()
-// }
+}
 
 // Function `displayCurrentQuestion`
     // function displayCurrentQuestion(){
@@ -155,5 +184,11 @@ function startGame(){
 // 
 
     // }
+    // let answerbtn = document.querySelector()
     let startBtn = document.querySelector("#startBtn");
+
     startBtn.addEventListener("click", startGame);
+    btn1.addEventListener("click", answerQuestion);
+    btn2.addEventListener("click", answerQuestion);
+    btn3.addEventListener("click", answerQuestion);
+    btn4.addEventListener("click", answerQuestion);
