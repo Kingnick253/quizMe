@@ -28,12 +28,36 @@ button{
     padding: 15px 25px;
 
 }
-
-.btn{
-    font-size: 35px;
+#startBtn{
+    font-size: 25px;
     padding: 5px;
     text-decoration: none;
     color: rgb(28, 26, 26);
-    background: linear-gradient(90deg, rgb(88, 59, 33)0%, rgb(105, 95, 95) 100%);
+    background: linear-gradient(90deg, rgb(66, 45, 25)0%, rgb(217, 216, 207) 100%);
+}
+#startBtn:hover{
+    background: linear-gradient(90deg, rgb(106, 106, 106)0%, rgb(216, 206, 199) 100%);
+}
+
+.submitBtn{
+    font-size: 25px;
+    padding: 5px;
+    text-decoration: none;
+    color: rgb(28, 26, 26);
+    background: linear-gradient(90deg, rgb(66, 45, 25)0%, rgb(217, 216, 207) 100%);
+    
+}
+.submitBtn:hover{
+    background: linear-gradient(90deg, rgb(106, 106, 106)0%, rgb(216, 206, 199) 100%);
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+   
+    border: 1px solid rgba(0, 0, 0, .2);
+    
 }
 

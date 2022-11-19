@@ -5,9 +5,12 @@ let scoreEl = document.querySelector("#score");
 let endGameEl = document.querySelector("#endGame");
 let resultsEl = document.querySelector("#results");
 let gameEl = document.querySelector("#gameContainer");
+
+
 let scoreArr = [];
 let timeInterval = "";
 let score = 0;
+let scoreInitials = [];
 
 //DECLARE  questions number (done)
 
@@ -16,9 +19,9 @@ let questions = [
     //question
     question: "Which is a JavaScript Data Type?",
     //answers
-    answers: ["String", "div", "body", "h1"],
+    answers: ["Undefined", "div", "body", "h1"],
     //correct answer
-    correctAns: "String",
+    correctAns: "Undefined",
   },
   {
     //question
@@ -30,7 +33,7 @@ let questions = [
   },
   {
     //question
-    question: "Array uses what to store more than one item?",
+    question: "Arrays uses what to store more than one item?",
     //answers
     answers: [
       "Parentheses",
@@ -43,29 +46,28 @@ let questions = [
   },
   {
     //question
-    question: "Functions are used in what?",
+    question: "Express is part of which language?",
     //answers
-    answers: ["Html", "CSS", "Java", "JavaScript"],
+    answers: ["Html", "CSS", "Python", "JavaScript"],
     //correct answer
     correctAns: "JavaScript",
   },
   {
     //question
-    question: "What is the peferred way to Declare a Variable?",
+    question: "What is the peferred way to declare a Variable?",
     //answers
     answers: ["const/let", "var", "Delcare", "Define"],
     //correct answer
     correctAns: "const/let",
   },
 ];
-// setquestionpostion to 0
+
 
 
  
 
 
 function displayQuestion() {
-  // for(i=0; i <questions.length; i++){
   gameEl.innerHTML = (`
 
     <h2>${questions[questionPosition].question}</h2>
@@ -75,13 +77,7 @@ function displayQuestion() {
     <button id = answer data-answer=" ${questions[questionPosition].answers[3]}">${questions[questionPosition].answers[3]}</button>
     
     `);
- 
-
-  // }
 }
-
-//  Declare a `timerInterval`
-//DELCARE the 'timeel'
 
 let timeLeft = 60;
 
@@ -103,13 +99,8 @@ function timer() {
 
 // function to startgame
 function startGame() {
-  // starts timer
- 
   const homepage = document.querySelector(".homepage");
   homepage.setAttribute("class", "hide");
-  //needs to hide the start screen
-
-  //start the question position to 0
   questionPosition = 0;
   timer();
   displayQuestion();
@@ -119,12 +110,17 @@ function startGame() {
 // Function `endGame`
 function endGame() {
     timeEl.textContent = "";
-    // scoreEl.textContent = timeLeft;
     clearInterval(timeInterval);
     resultsEl.textContent ="";
     gameEl.style.display = "none";
     endGameEl.style.display ="block";
     scoreEl.textContent = score;
+    let highscoreEl = document.querySelector("#highScore");
+    highscoreEl.addEventListener("click", function(event){
+        event.preventDefault();
+        logScore(scoreEl);
+    });
+    
 }
 function scoreInterval() {
     resultsEl.textContent = "";
@@ -143,7 +139,6 @@ function answerQuestion(event) {
         timeLeft = (timeLeft - 10);
         resultsEl.style.display = "block";
         resultsEl.textContent = "Q # " + (questionPosition + 1) + " Wrong!";
-        score -= 3;
     }
       if(questionPosition < ( questions.length - 1)) {
         questionPosition++;
@@ -155,6 +150,22 @@ function answerQuestion(event) {
       }
     }
     // } 
+  }
+
+  function logScore(scoreEl){
+    let initialsEl = document.querySelector("#initials").value;
+    if(initialsEl === ""){
+        alert("You need to add your Initials");
+        return;
+    }
+    //save score and initials to local storage
+    localStorage.setItem("scoreEl", JSON.stringify(score));
+    localStorage.setItem("initials", JSON.stringify(initialsEl));
+    scoreArr.push(score);
+    scoreInitials.push(initialsEl);
+    localStorage.setItem("scoreArr", JSON.stringify(scoreArr));
+    localStorage.setItem("scoreInitials", JSON.stringify(scoreInitials));
+    
   }
 
 let startBtn = document.querySelector("#startBtn");
