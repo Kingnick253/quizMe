@@ -59,20 +59,19 @@ let questions = [
 ];
 // setquestionpostion to 0
 
-// const questionPrompt = $(".question");
-// questionPrompt.html("");
-let currentQuestion = questions[questionPosition];
+
+ 
 
 
 function displayQuestion() {
   // for(i=0; i <questions.length; i++){
   gameEl.innerHTML = (`
 
-    <h2>${currentQuestion.question}</h2>
-    <button id = answer data-answer= "${currentQuestion.answers[0]}">${currentQuestion.answers[0]}</button>
-    <button id = answer data-answer=" ${currentQuestion.answers[1]}">${currentQuestion.answers[1]}</button>
-    <button id = answer data-answer=" ${currentQuestion.answers[2]}">${currentQuestion.answers[2]}</button>
-    <button id = answer data-answer=" ${currentQuestion.answers[3]}">${currentQuestion.answers[3]}</button>
+    <h2>${questions[questionPosition].question}</h2>
+    <button id = answer data-answer=" ${questions[questionPosition].answers[0]}">${questions[questionPosition].answers[0]}</button>
+    <button id = answer data-answer=" ${questions[questionPosition].answers[1]}">${questions[questionPosition].answers[1]}</button>
+    <button id = answer data-answer=" ${questions[questionPosition].answers[2]}">${questions[questionPosition].answers[2]}</button>
+    <button id = answer data-answer=" ${questions[questionPosition].answers[3]}">${questions[questionPosition].answers[3]}</button>
     
     `);
  
@@ -88,9 +87,9 @@ let timeLeft = 60;
 function timer() {
   let timeInterval = setInterval(function () {
    
+      if (timeLeft > 0) {
     timeLeft--;
     timeEl.textContent = timeLeft;
-    if (timeLeft >= 0) {
     } else {
       clearInterval(timeInterval);
 
@@ -103,14 +102,14 @@ function timer() {
 // function to startgame
 function startGame() {
   // starts timer
-  timer();
+ 
   const homepage = document.querySelector(".homepage");
   homepage.setAttribute("class", "hide");
   //needs to hide the start screen
 
   //start the question position to 0
   questionPosition = 0;
-  
+  timer();
   displayQuestion();
   
 }
@@ -120,12 +119,13 @@ function endGame() {
  
 }
 function scoreInterval() {
-    
+    scoreEl.textContent = "";
+    scoreEl.style.display = "none";
 }
 //function to answerQuestion
 function answerQuestion(event) {
   if (event.target.matches("#answer")) {
-    if (event.target.textContent === currentQuestion.correctAns) {
+    if (event.target.textContent === questions[questionPosition].correctAns) {
         scoreEl.style.display = "block";
         scoreEl.textContent = "Q # " + (questionPosition + 1) + "Nice Job!";
         setTimeout(scoreEl, 1000);
