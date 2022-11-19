@@ -2,10 +2,11 @@ let btnAnswer = document.querySelectorAll("button");
 let questionPosition = 0;
 let timeEl = document.querySelector("#timer");
 let scoreEl = document.querySelector("#score");
-let finalScoreEl = document.querySelector("#finalscore");
+let endGameEl = document.querySelector("#endGame");
 let resultsEl = document.querySelector("#results");
 let gameEl = document.querySelector("#gameContainer");
 let scoreArr = [];
+let timeInterval = "";
 
 
 //DECLARE  questions number (done)
@@ -93,7 +94,7 @@ function timer() {
     } else {
       clearInterval(timeInterval);
 
-      // endGame();
+      endGame();
       // stops execution of action at set interval
     }
   }, 1000);
@@ -116,7 +117,10 @@ function startGame() {
 
 // Function `endGame`
 function endGame() {
- 
+    timeEl.textContent = "";
+    clearInterval(timeInterval);
+    gameEl.style.display = "none";
+    endGameEl.style.display ="block";
 }
 function scoreInterval() {
     scoreEl.textContent = "";
