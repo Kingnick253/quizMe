@@ -5,8 +5,7 @@ let scoreEl = document.querySelector("#score");
 let endGameEl = document.querySelector("#endGame");
 let resultsEl = document.querySelector("#results");
 let gameEl = document.querySelector("#gameContainer");
-
-
+let viewHighscore = document.querySelector("#viewhighScores");
 let scoreArr = [];
 let timeInterval = "";
 let score = 0;
@@ -118,7 +117,7 @@ function endGame() {
     let highscoreEl = document.querySelector("#highScore");
     highscoreEl.addEventListener("click", function(event){
         event.preventDefault();
-        logScore(scoreEl);
+        logScore();
     });
     
 }
@@ -152,7 +151,7 @@ function answerQuestion(event) {
     // } 
   }
 
-  function logScore(scoreEl){
+  function logScore(){
     let initialsEl = document.querySelector("#initials").value;
     if(initialsEl === ""){
         alert("You need to add your Initials");
@@ -165,10 +164,42 @@ function answerQuestion(event) {
     scoreInitials.push(initialsEl);
     localStorage.setItem("scoreArr", JSON.stringify(scoreArr));
     localStorage.setItem("scoreInitials", JSON.stringify(scoreInitials));
+    showHighscore();
+  }
+  
+  function showHighscore(){
+    endGameEl.setAttribute("id", "highscorePage");
+    endGameEl.innerHTML=(`
+        <div>
+        
+        <h1>Highscore</h1>
+    </div>
+    <table id="table">
+        <tr>
+            <th> Top player </th>
+            <th> HighScores </th>
+
+        </tr>
+    </table>
+
+    <a href="./">Home</a>
     
+    
+    `);
+   viewHighscore.style.display = "none";
+   for(i = 0; i <scoreArr.length; i++){
+    let creatNewRow = document.createElement("tr");
+    creatNewRow.innerHTML = `
+        <td>${scoreInitials[i]}</td>
+        <td>${scoreArr[i]}</td>
+    
+    `;
+    table.appendChild(creatNewRow);
+   }
   }
 
 let startBtn = document.querySelector("#startBtn");
 
 startBtn.addEventListener("click", startGame);
 gameEl.addEventListener("click", answerQuestion);
+viewHighscore.addEventListener("click", showHighscore);
