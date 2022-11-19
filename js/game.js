@@ -86,11 +86,12 @@ function displayQuestion() {
 let timeLeft = 60;
 
 function timer() {
-  let timeInterval = setInterval(function () {
+  timeInterval = setInterval(function () {
    
       if (timeLeft > 0) {
+        timeEl.textContent = timeLeft;
     timeLeft--;
-    timeEl.textContent = timeLeft;
+    
     } else {
       clearInterval(timeInterval);
 
@@ -118,25 +119,28 @@ function startGame() {
 // Function `endGame`
 function endGame() {
     timeEl.textContent = "";
+    // scoreEl.textContent = timeLeft;
     clearInterval(timeInterval);
     gameEl.style.display = "none";
     endGameEl.style.display ="block";
 }
 function scoreInterval() {
-    scoreEl.textContent = "";
-    scoreEl.style.display = "none";
+    resultsEl.textContent = "";
+    resultsEl.style.display = "none";
 }
 //function to answerQuestion
 function answerQuestion(event) {
   if (event.target.matches("#answer")) {
     if (event.target.textContent === questions[questionPosition].correctAns) {
-        scoreEl.style.display = "block";
-        scoreEl.textContent = "Q # " + (questionPosition + 1) + "Nice Job!";
+        resultsEl.style.display = "block";
+        resultsEl.textContent = "Q # " + (questionPosition + 1) + "Nice Job!";
+        scoreEl++;
         setTimeout(scoreEl, 1000);
     } else {
         timeLeft = (timeLeft - 10);
-        scoreEl.style.display = "block";
-        scoreEl.textContent = "Q # " + (questionPosition + 1) + "Not even close";
+        resultsEl.style.display = "block";
+        resultsEl.textContent = "Q # " + (questionPosition + 1) + " Wrong!";
+        scoreEl-- ;
     }
       if(questionPosition < ( questions.length - 1)) {
         questionPosition++;
