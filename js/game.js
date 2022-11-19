@@ -7,7 +7,7 @@ let resultsEl = document.querySelector("#results");
 let gameEl = document.querySelector("#gameContainer");
 let scoreArr = [];
 let timeInterval = "";
-
+let score = 0;
 
 //DECLARE  questions number (done)
 
@@ -121,8 +121,10 @@ function endGame() {
     timeEl.textContent = "";
     // scoreEl.textContent = timeLeft;
     clearInterval(timeInterval);
+    resultsEl.textContent ="";
     gameEl.style.display = "none";
     endGameEl.style.display ="block";
+    scoreEl.textContent = score;
 }
 function scoreInterval() {
     resultsEl.textContent = "";
@@ -134,17 +136,20 @@ function answerQuestion(event) {
     if (event.target.textContent === questions[questionPosition].correctAns) {
         resultsEl.style.display = "block";
         resultsEl.textContent = "Q # " + (questionPosition + 1) + "Nice Job!";
-        scoreEl++;
+        score += 5;
         setTimeout(scoreEl, 1000);
+        
     } else {
         timeLeft = (timeLeft - 10);
         resultsEl.style.display = "block";
         resultsEl.textContent = "Q # " + (questionPosition + 1) + " Wrong!";
-        scoreEl-- ;
+        score -= 3;
     }
       if(questionPosition < ( questions.length - 1)) {
         questionPosition++;
+        
         displayQuestion();
+        console.log(score);
       }else{
         endGame();
       }
