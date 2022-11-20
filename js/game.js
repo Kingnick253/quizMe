@@ -6,6 +6,9 @@ let endGameEl = document.querySelector("#endGame");
 let resultsEl = document.querySelector("#results");
 let gameEl = document.querySelector("#gameContainer");
 let viewHighscore = document.querySelector("#viewhighScores");
+let homepage = document.querySelector(".homepage");
+let time = document.querySelector(".time");
+let highscoreEl = document.querySelector("#highScore");
 let scoreArr = [];
 let timeInterval = "";
 let score = 0;
@@ -68,7 +71,7 @@ let questions = [
 
 function displayQuestion() {
   gameEl.innerHTML = (`
-
+ 
     <h2>${questions[questionPosition].question}</h2>
     <button id = answer data-answer=" ${questions[questionPosition].answers[0]}">${questions[questionPosition].answers[0]}</button>
     <button id = answer data-answer=" ${questions[questionPosition].answers[1]}">${questions[questionPosition].answers[1]}</button>
@@ -98,11 +101,11 @@ function timer() {
 
 // function to startgame
 function startGame() {
-  const homepage = document.querySelector(".homepage");
-  homepage.setAttribute("class", "hide");
-  questionPosition = 0;
-  timer();
-  displayQuestion();
+    viewHighscore.style.display = "none";
+    homepage.setAttribute("class", "hide");
+     questionPosition = 0;
+    timer();
+    displayQuestion();
   
 }
 
@@ -113,11 +116,12 @@ function endGame() {
     resultsEl.textContent ="";
     gameEl.style.display = "none";
     endGameEl.style.display ="block";
+    time.setAttribute("class", "hide");
     scoreEl.textContent = score;
-    let highscoreEl = document.querySelector("#highScore");
+    
     highscoreEl.addEventListener("click", function(event){
         event.preventDefault();
-        logScore();
+        logScore(score);
     });
     
 }
@@ -130,9 +134,9 @@ function answerQuestion(event) {
   if (event.target.matches("#answer")) {
     if (event.target.textContent === questions[questionPosition].correctAns) {
         resultsEl.style.display = "block";
-        resultsEl.textContent = "Q # " + (questionPosition + 1) + "Nice Job!";
+        resultsEl.textContent = "Q # " + (questionPosition + 1) + " Nice Job!";
         score += 5;
-        setTimeout(scoreEl, 1000);
+        // setTimeout(scoreEl, 1000);
         
     } else {
         timeLeft = (timeLeft - 10);
@@ -151,19 +155,25 @@ function answerQuestion(event) {
     // } 
   }
 
-  function logScore(){
+  function logScore(score){
     let initialsEl = document.querySelector("#initials").value;
     if(initialsEl === ""){
         alert("You need to add your Initials");
         return;
     }
     //save score and initials to local storage
-    localStorage.setItem("scoreEl", JSON.stringify(score));
+    localStorage.setItem("score", JSON.stringify(score));
     localStorage.setItem("initials", JSON.stringify(initialsEl));
     scoreArr.push(score);
     scoreInitials.push(initialsEl);
     localStorage.setItem("scoreArr", JSON.stringify(scoreArr));
     localStorage.setItem("scoreInitials", JSON.stringify(scoreInitials));
+    
+    scoreArr = JSON.parse(localStorage.getItem('scoreArr'));
+    console.log(scoreArr);
+
+    // let scoresLocal = JSON.parse(localStorage.getItem("scoreArr"));
+    // console.log(scoresLocal);
     showHighscore();
   }
   
@@ -182,11 +192,17 @@ function answerQuestion(event) {
         </tr>
     </table>
 
-    <a href="./">Home</a>
     
     
     `);
+    resultsEl.textContent ="";
    viewHighscore.style.display = "none";
+   gameEl.style.display = "none";
+   endGameEl.style.display ="block";
+   homepage.setAttribute("class", "hide");
+   time.setAttribute("class", "hide");
+    
+
    for(i = 0; i <scoreArr.length; i++){
     let creatNewRow = document.createElement("tr");
     creatNewRow.innerHTML = `
@@ -196,10 +212,14 @@ function answerQuestion(event) {
     `;
     table.appendChild(creatNewRow);
    }
+   let playAgain = document.getElementById("playAgainBtn");
+   playAgain.addEventListener("click", startGame);
+   startBtn.addEventListener("click", startGame);
+
   }
 
 let startBtn = document.querySelector("#startBtn");
-
+console.log(viewHighscore);
 startBtn.addEventListener("click", startGame);
 gameEl.addEventListener("click", answerQuestion);
-viewHighscore.addEventListener("click", showHighscore);
+// viewHighscore.addEventListener("click", showHighscore);
