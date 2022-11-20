@@ -38,7 +38,7 @@ Covered by N/A
     
   ## Contributions
     
-  If you created an application of package and would like other development
+  N/A
     
 
     
