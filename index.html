@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
-    <title>JavaScriptQuiz</title>
-    
-</head>
-<body>
-    
-    <div class="time">
-        <button id="viewhighScores" >View Highscore</button>
-        <!-- going to have to make this a templater literala and input timer for 0 -->
-    <p> Timer:
-        <span id="timer"> 60</span>
-    </p>
-    </div>
-        
-   
-    
-    <div class="homepage">
-        <h1>Welcome To the JavaScript Quiz!</h1>
-        <h2>Once you click the start button you will begin the test. You will have 60 seconds to answer 5
-            JavaScript related question. Good luck!
-        </h2>
-        
-        <button id = "startBtn">Start Game</button>
-      
-    </div>
-    <div id="gameContainer">
-      
-    </div>
-    <div id="endGame" class="hide">
-        <h3>Game Over</h3>
-        <h3>Final Score: <span id = "score"></span></h3>
-            <form id="form">
-                <label for="initials">Initials:</label>
-                <input type="text" id="initials">
-                <button class="submitBtn"  id="highScore"  >Enter</button>
-            </form>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>JavaScript Quiz</title>
+  </head>
+  <body>
+    <!-- Timer Section -->
+    <header class="time">
+      <button id="viewhighScores">View Highscores</button>
+      <p>Timer: <span id="timer">60</span></p>
+    </header>
 
-    </div >
-    <div id="results">
+    <!-- Homepage/Intro Section -->
+    <main class="homepage">
+      <h1>Welcome to the JavaScript Quiz!</h1>
+      <p>
+        Once you click the start button, you will have 60 seconds to answer 5
+        JavaScript-related questions. Good luck!
+      </p>
+      <button id="startBtn">Start Game</button>
+    </main>
 
-    </div>
-    </div>
+    <!-- Game Container (Questions will be loaded here) -->
+    <section id="gameContainer" class="hide"></section>
 
+    <!-- End Game Section -->
+    <section id="endGame" class="hide">
+      <h3>Game Over</h3>
+      <h3>Final Score: <span id="score"></span></h3>
+      <form id="scoreForm">
+        <label for="initials">Enter Initials:</label>
+        <input
+          type="text"
+          id="initials"
+          maxlength="3"
+          placeholder="ABC"
+          required
+        />
+        <button type="submit" class="submitBtn" id="highScore">Submit</button>
+      </form>
+    </section>
 
-</body>
-<script src="./js/game.js"></script>
+    <!-- Results Section (Shows correct/incorrect answers feedback) -->
+    <section id="results" class="hide"></section>
+
+    <!-- JavaScript -->
+    <script src="./js/game.js"></script>
+  </body>
 </html>
