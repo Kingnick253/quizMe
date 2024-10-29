@@ -1,166 +1,164 @@
-// Declare count down
-let startBtn = document.querySelector("#startBtn");
+// Elements Selection
+const btnAnswer = document.querySelectorAll("button");
+const timeEl = document.querySelector("#timer");
+const scoreEl = document.querySelector("#score");
+const endGameEl = document.querySelector("#endGame");
+const resultsEl = document.querySelector("#results");
+const gameEl = document.querySelector("#gameContainer");
+const viewHighscore = document.querySelector("#viewhighScores");
+const homepage = document.querySelector(".homepage");
+const time = document.querySelector(".time");
+const highscoreEl = document.querySelector("#highScore");
+const startBtn = document.querySelector("#startBtn");
 
-
-const hideEndScreen = document.querySelector(".endGame").style.display = "none";
-
-//DECLARE  questions number (done)
-
-let questions = [
-    {
-        //question
-        question:"Which is a JavaScript Data Type?",
-        //answers
-        answers: ["String", "div", "body", "h1"],
-        //correct answer 
-        correctAns: "String"
-    },
-    {
-        //question
-        question:"Which is a looping structure?",
-        //answers
-        answers: ["For Loop", "IF/Else", "Array", "Function"],
-        //correct answer 
-        correctAns: "For Loop"
-    },
-    {
-        //question
-        question:"Array uses what to store more than one item?",
-        //answers
-        answers: ["Parentheses", "Curly Braces", "Square Brackets", "Carrot Brackets"],
-        //correct answer 
-        correctAns: "Square Brackets" 
-    },
-    {
-        //question
-        question:"Functions are used in what?",
-        //answers
-        answers: ["Html", "CSS", "Java", "JavaScript"],
-        //correct answer 
-        correctAns: "JavaScript" 
-    },
-    {
-        //question
-        question:"What is the peferred way to Declare a Variable?",
-        //answers
-        answers: ["const/let", "var", "Delcare", "Define"],
-        //correct answer 
-        correctAns: "const/let" 
-    }
-    
-];
-// setquestionpostion to 0
-let questionPosition = 0;
-let currentQuestion = questions[questionPosition];
-// for(let i = 0; i < questions.length; i++);
-
-// const questionPrompt = $(".question");
-// questionPrompt.html("");
-function questPosition(){
-    let template = `
-    <h2>${currentQuestion.question}</h2>
-    <button data-answer="${currentQuestion.answers[0]}">${currentQuestion.answers[0]}</button>
-    <button data-answer=" ${currentQuestion.answers[1]}">${currentQuestion.answers[1]}</button>
-    <button data-answer=" ${currentQuestion.answers[2]}">${currentQuestion.answers[2]}</button>
-    <button data-answer=" ${currentQuestion.answers[3]}">${currentQuestion.answers[3]}</button>
-    
-    `
-    document.getElementById("gameContainer").innerHTML = template;
-
-}
-
-//  Declare a `timerInterval`
-//DELCARE the 'timeel'
+// Game Variables
+let questionIndex = 0;
 let timeLeft = 60;
+let score = 0;
+let scoreArr = [];
+let initialsArr = [];
+let timeInterval;
 
-function timer(){
-   let timeInterval = setInterval(function(){
-        timeLeft--;
-        
-        if(timeLeft >= 0){
-            let timeEl = document.querySelector('#timer');
-            timeEl.textContent = timeLeft;
-            // stops execution of action at set interval  
-        }else{
-            clearInterval(timeInterval);
-        }
-        
+// Questions Array
+const questions = [
+  {
+    question: "Which is a JavaScript Data Type?",
+    answers: ["Undefined", "div", "body", "h1"],
+    correctAns: "Undefined",
+  },
+  {
+    question: "Which is a looping structure?",
+    answers: ["For Loop", "IF/Else", "Array", "Function"],
+    correctAns: "For Loop",
+  },
+  {
+    question: "Arrays use what to store more than one item?",
+    answers: [
+      "Parentheses",
+      "Curly Braces",
+      "Square Brackets",
+      "Carrot Brackets",
+    ],
+    correctAns: "Square Brackets",
+  },
+  {
+    question: "Express is part of which language?",
+    answers: ["HTML", "CSS", "Python", "JavaScript"],
+    correctAns: "JavaScript",
+  },
+  {
+    question: "What is the preferred way to declare a variable?",
+    answers: ["const/let", "var", "Declare", "Define"],
+    correctAns: "const/let",
+  },
+];
 
-    },1000);
-    
+// Functions
+function displayQuestion() {
+  const currentQuestion = questions[questionIndex];
+  gameEl.innerHTML = `
+    <h2>${currentQuestion.question}</h2>
+    ${currentQuestion.answers
+      .map(
+        (answer, index) => `
+        <button class="answer-btn" data-answer="${answer}">${answer}</button>
+      `
+      )
+      .join("")}
+  `;
 }
 
-
-
-// function to startgame
-function startGame(){
-    timer();
-    const start = document.querySelector(".start");
-//  google how to add a class in lieu of setting attribute.
-    start.setAttribute("class", "hide");
-    //needs to hide the start screen
-    
-    //start the question position to 0,display the current quesiton
-    questPosition();
-    
-   
-    //set the starting value of ` countdown`
-    
-    // Start the timer `Starttimer`
-    // IF `countdown` === 0 THEN `endGame()`
-    if(timeLeft === 58){
-        endGame();
+function startTimer() {
+  timeInterval = setInterval(() => {
+    if (timeLeft > 0) {
+      timeEl.textContent = timeLeft;
+      timeLeft--;
+    } else {
+      clearInterval(timeInterval);
+      endGame();
     }
+  }, 1000);
 }
 
-// Function `endGame`
+function startGame() {
+  viewHighscore.style.display = "none";
+  homepage.classList.add("hide");
+  questionIndex = 0;
+  timeLeft = 60;
+  score = 0;
+  startTimer();
+  displayQuestion();
+}
 
-    function endGame(){
-        //Hide the questions area
-        const quest = document.querySelector("gameContainer");
-        quest = setAttribute("class", "hide");
-        hideEndScreen = setAttribute("class" ,"block");
-        console.log("Game ended ");
+function endGame() {
+  clearInterval(timeInterval);
+  gameEl.style.display = "none";
+  endGameEl.style.display = "block";
+  scoreEl.textContent = score;
+  time.classList.add("hide");
+}
 
-        // show the recorded highscore
+function handleAnswer(event) {
+  if (!event.target.matches(".answer-btn")) return;
 
-        //CLEAR the timer interval to stop from running
+  const selectedAnswer = event.target.dataset.answer.trim();
+  const correctAnswer = questions[questionIndex].correctAns;
 
+  resultsEl.style.display = "block";
+  resultsEl.textContent = `Q #${questionIndex + 1} ${
+    selectedAnswer === correctAnswer ? "Nice Job!" : "Wrong!"
+  }`;
 
+  if (selectedAnswer === correctAnswer) {
+    score += 5;
+  } else {
+    timeLeft -= 10;
+  }
 
-    }
-//function to answerQuestion
-    // function answerQuestion(){
+  if (questionIndex < questions.length - 1) {
+    questionIndex++;
+    displayQuestion();
+  } else {
+    endGame();
+  }
+}
 
-    //Check if the answer is right
-    
-    // IF the answer is wrong
-    
-    // THEN we need to subtract from 'countdown'
-    
-    
-    // iNCREASING THE QUESITON POSITION BY 1   
-    // IF ive passed the last quesiton
-        //THEN `endgame`
-        
-    // ELSE 
-        // Display the next question
-        // call questPosition();
+function saveScore() {
+  const initials = document.querySelector("#initials").value.trim();
+  if (initials === "") {
+    alert("You need to add your Initials");
+    return;
+  }
+  scoreArr.push(score);
+  initialsArr.push(initials);
 
-    
-    // questionPosition++
-    // displayCurrentQuestion()
-// }
+  localStorage.setItem("scoreArr", JSON.stringify(scoreArr));
+  localStorage.setItem("initialsArr", JSON.stringify(initialsArr));
+  displayHighscores();
+}
 
-// Function `displayCurrentQuestion`
-    // function displayCurrentQuestion(){
-        // questions[questionPosition]
-        
-    // }
-// Function `recordTheHighscore`
-    // function recordHighscore(){
-// 
+function displayHighscores() {
+  endGameEl.innerHTML = `
+    <div>
+      <h1>Highscores</h1>
+      <table id="highscoreTable">
+        <tr><th>Top Player</th><th>High Score</th></tr>
+        ${scoreArr
+          .map(
+            (score, index) =>
+              `<tr><td>${initialsArr[index]}</td><td>${score}</td></tr>`
+          )
+          .join("")}
+      </table>
+      <button id="playAgainBtn">Play Again</button>
+    </div>
+  `;
 
-    // }
-    
-    startBtn.addEventListener("click", startGame);
+  document.querySelector("#playAgainBtn").addEventListener("click", startGame);
+}
+
+// Event Listeners
+startBtn.addEventListener("click", startGame);
+gameEl.addEventListener("click", handleAnswer);
+highscoreEl.addEventListener("click", saveScore);
+viewHighscore.addEventListener("click", displayHighscores);

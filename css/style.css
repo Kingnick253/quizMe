@@ -1,8 +1,13 @@
-root{
+:root{
     --buttonC: #1D3557;
+    background-color: rgb(239, 234, 226);
+}
+*{
+
+    
 }
 /*  aligns the content in the center of the page */
-.start, #gameContainer{
+.homepage, #gameContainer{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,3 +28,36 @@ button{
     padding: 15px 25px;
 
 }
+#startBtn{
+    font-size: 25px;
+    padding: 5px;
+    text-decoration: none;
+    color: rgb(28, 26, 26);
+    background: linear-gradient(90deg, rgb(66, 45, 25)0%, rgb(217, 216, 207) 100%);
+}
+#startBtn:hover{
+    background: linear-gradient(90deg, rgb(106, 106, 106)0%, rgb(216, 206, 199) 100%);
+}
+
+.submitBtn{
+    font-size: 25px;
+    padding: 5px;
+    text-decoration: none;
+    color: rgb(28, 26, 26);
+    background: linear-gradient(90deg, rgb(66, 45, 25)0%, rgb(217, 216, 207) 100%);
+    
+}
+.submitBtn:hover{
+    background: linear-gradient(90deg, rgb(106, 106, 106)0%, rgb(216, 206, 199) 100%);
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+   
+    border: 1px solid rgba(0, 0, 0, .2);
+    
+}
+
