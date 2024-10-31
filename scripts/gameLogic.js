@@ -1,55 +1,50 @@
 import { questions } from "./questions.js";
-import { startTimer, resetTimer } from "./timer.js";
-import { saveScore } from "./storage.js";
+import { startTimer, stopTimer } from "./timer.js";
 
+let currentQuestionIndex = 0;
 let score = 0;
-let questionIndex = 0;
 
 export function startGame() {
-    document.querySelector(".homepage").classList.add("hide");
-    console.log("Start button hit.");
-    questionIndex = 0;
+    document.getElementById("startScreen").classList.add("hide");
+    document.getElementById("gameContainer").classList.remove("hide");
     score = 0;
-    resetTimer();
-    startTimer(endGame);
-    displayQuestion();
+    currentQuestionIndex = 0;
+    startTimer(60, endGame);
+    showQuestion();
 }
 
+function showQuestion() {
+    const questionData = questions[currentQuestionIndex];
+    document.getElementById("question").textContent = questionData.question;
+    const answerButtons = document.getElementById("answerButtons");
+    answerButtons.innerHTML = "";
 
-export function displayQuestion() {
-  const currentQuestion = questions[questionIndex];
-  const gameEl = document.querySelector("#gameContainer");
-  gameEl.innerHTML = `
-        <h2>${currentQuestion.question}</h2>
-        ${currentQuestion.answers
-          .map((answer) => `<button class="answer-btn">${answer}</button>`)
-          .join("")}
-    `;
+    questionData.answers.forEach(answer => {
+        const button = document.createElement("button");
+        button.textContent = answer;
+        button.classList.add("answerBtn");
+        button.addEventListener("click", () => handleAnswer(answer));
+        answerButtons.appendChild(button);
+    });
 }
 
-export function handleAnswer(event) {
-  if (event.target.matches(".answer-btn")) {
-    const isCorrect =
-      event.target.textContent.trim() === questions[questionIndex].correctAns;
-    updateScoreAndFeedback(isCorrect);
-    questionIndex < questions.length - 1 ? nextQuestion() : endGame();
-  }
+function handleAnswer(selectedAnswer) {
+    const questionData = questions[currentQuestionIndex];
+    if (selectedAnswer === questionData.correctAnswer) {
+        score += 10;
+    }
+
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+        showQuestion();
+    } else {
+        endGame();
+    }
 }
 
-function nextQuestion() {
-  questionIndex++;
-  displayQuestion();
-}
-
-function updateScoreAndFeedback(isCorrect) {
-  const resultsEl = document.querySelector("#results");
-  resultsEl.style.display = "block";
-  resultsEl.textContent = isCorrect ? "Correct!" : "Incorrect!";
-  score += isCorrect ? 5 : 0;
-}
-
-function endGame() {
-  document.querySelector("#score").textContent = score;
-  saveScore(score);
-  // Show end game screen
+export function endGame() {
+    stopTimer();
+    document.getElementById("gameContainer").classList.add("hide");
+    document.getElementById("endScreen").classList.remove("hide");
+    document.getElementById("finalScore").textContent = score;
 }
