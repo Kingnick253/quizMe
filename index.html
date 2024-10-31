@@ -1,53 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/style.css" />
-    <title>JavaScript Quiz</title>
-  </head>
-  <body>
-    <!-- Timer Section -->
-    <header class="time">
-      <button id="viewhighScores">View Highscores</button>
-      <p>Timer: <span id="timer">60</span></p>
-    </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
 
-    <!-- Homepage/Intro Section -->
-    <main class="homepage">
-      <h1>Welcome to the JavaScript Quiz!</h1>
-      <p>
-        Once you click the start button, you will have 60 seconds to answer 5
-        JavaScript-related questions. Good luck!
-      </p>
-      <button id="startBtn">Start Game</button>
-    </main>
+    <!-- Timer and High Scores -->
+    <div class="header">
+        <button id="viewHighScores">View High Scores</button>
+        <p>Timer: <span id="timer">60</span> seconds</p>
+    </div>
 
-    <!-- Game Container (Questions will be loaded here) -->
-    <section id="gameContainer" class="hide"></section>
+    <!-- Start Screen -->
+    <div id="startScreen">
+        <h1>Welcome to the JavaScript Quiz!</h1>
+        <button id="startBtn">Start Game</button>
+    </div>
 
-    <!-- End Game Section -->
-    <section id="endGame" class="hide">
-      <h3>Game Over</h3>
-      <h3>Final Score: <span id="score"></span></h3>
-      <form id="scoreForm">
-        <label for="initials">Enter Initials:</label>
-        <input
-          type="text"
-          id="initials"
-          maxlength="3"
-          placeholder="ABC"
-          required
-        />
-        <button type="submit" class="submitBtn" id="highScore">Submit</button>
-      </form>
-    </section>
+    <!-- Game Container -->
+    <div id="gameContainer" class="hide">
+        <h2 id="question"></h2>
+        <div id="answerButtons"></div>
+    </div>
 
-    <!-- Results Section (Shows correct/incorrect answers feedback) -->
-    <section id="results" class="hide"></section>
+    <!-- End Game Screen -->
+    <div id="endScreen" class="hide">
+        <h3>Game Over!</h3>
+        <p>Your final score: <span id="finalScore"></span></p>
+        <input type="text" id="initials" placeholder="Your initials">
+        <button id="saveScoreBtn">Save Score</button>
+    </div>
 
-    <!-- JavaScript -->
-    <script src="./js/game.js"></script>
-  </body>
+    <script type="module" src="./scripts/app.js"></script>
+</body>
 </html>

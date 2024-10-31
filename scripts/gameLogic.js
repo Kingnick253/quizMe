@@ -6,13 +6,15 @@ let score = 0;
 let questionIndex = 0;
 
 export function startGame() {
-  document.querySelector(".homepage").classList.add("hide");
-  questionIndex = 0;
-  score = 0;
-  resetTimer();
-  startTimer(endGame);
-  displayQuestion();
+    document.querySelector(".homepage").classList.add("hide");
+    console.log("Start button hit.");
+    questionIndex = 0;
+    score = 0;
+    resetTimer();
+    startTimer(endGame);
+    displayQuestion();
 }
+
 
 export function displayQuestion() {
   const currentQuestion = questions[questionIndex];
