@@ -1,19 +1,20 @@
-let timeInterval;
-let timeLeft = 60;
+let timerInterval;
 
-export function startTimer(onTimeUp) {
-  timeInterval = setInterval(() => {
-    if (timeLeft > 0) {
-      document.querySelector("#timer").textContent = timeLeft;
-      timeLeft--;
-    } else {
-      clearInterval(timeInterval);
-      onTimeUp();
-    }
-  }, 1000);
+export function startTimer(duration, callback) {
+    let timeLeft = duration;
+    document.getElementById("timer").textContent = timeLeft;
+    
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").textContent = timeLeft;
+
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            callback(); // End game when timer reaches zero
+        }
+    }, 1000);
 }
 
-export function resetTimer() {
-  clearInterval(timeInterval);
-  timeLeft = 60;
+export function stopTimer() {
+    clearInterval(timerInterval);
 }
