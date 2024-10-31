@@ -1,11 +1,12 @@
-import { startGame, endGame, handleAnswer } from "./gameLogic.js";
-import { loadQuestions } from "./questions.js";
-import { startTimer } from "./timer.js";
-import { displayHighscores } from "./storage.js";
+// scripts/app.js
+import { startGame, endGame } from "./gameLogic.js";
 
-document.querySelector("#startBtn").addEventListener("click", startGame());
-document.querySelector("#viewhighScores").addEventListener("click", displayHighscores);
-document.querySelector("#gameContainer").addEventListener("click", handleAnswer);
-
-// Initialize questions data
-loadQuestions();
+// Event Listeners
+document.getElementById("startBtn").addEventListener("click", startGame);
+document.getElementById("saveScoreBtn").addEventListener("click", () => {
+    const initials = document.getElementById("initials").value;
+    if (initials) {
+        saveScore(initials, score); // Optionally save score to local storage
+    }
+    // Restart the game or show high scores
+});
