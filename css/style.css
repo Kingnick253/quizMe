@@ -27,7 +27,7 @@ button {
     height: 50px;
     align-items: center; 
     width: 100%;
-    gap: 10px; 
+    gap: 10px; /*adds the space between the buttons for the answers.*/
     
 }
 
